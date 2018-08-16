@@ -21,16 +21,18 @@ extern "C"
 	typedef struct {
 		struct tm time;
 		int next;
-	} element_t;
+	} node_t;
 	
 	typedef struct {
-		element_t data[SIZE_DATA];
+		node_t node[SIZE_DATA];
 	} list_t;
 
 	void list_init(list_t *thiz);
 	void list_dump(list_t *thiz);
 	void list_get_time(struct tm *);
 	int list_insert(list_t *, struct tm *);
+	int list_delete(list_t *thiz, struct tm *);
+
 #endif /* USE_ARRAY */
 
 #ifdef __cplusplus
