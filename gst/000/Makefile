@@ -6,9 +6,9 @@
 
 CC := gcc
 #GST_PATH := $(SDK_PATH)/package/gstreamer
-GST_PATH := ../../../linux_x86_64
-#CFLAGS += `pkg-config --cflags $(GST_PATH)/lib/pkgconfig/gstreamer-1.0.pc`
-CFLAGS += -pthread -I$(GST_PATH)/include/gstreamer-1.0 -I$(GST_PATH)/include/glib-2.0 -I$(GST_PATH)/lib/glib-2.0/include
+GST_PATH := /home/joel/workspace/linux_x86_64
+CFLAGS += `pkg-config --define-variable=prefix=$(GST_PATH) --define-variable=libdir=$(GST_PATH)/lib --cflags $(GST_PATH)/lib/pkgconfig/gstreamer-1.0.pc`
+#CFLAGS += -pthread -I$(GST_PATH)/include/gstreamer-1.0 -I$(GST_PATH)/include/glib-2.0 -I$(GST_PATH)/lib/glib-2.0/include
 #-I$(GST_PATH)/include/glib-2.0 -I$(GST_PATH)/include/gstreamer-1.0
 #LDFLAGS += `pkg-config --libs $(GST_PATH)/lib/pkgconfig/gstreamer-1.0.pc`
 LDFLAGS += -L$(GST_PATH)/lib -lgstreamer-1.0 -lgobject-2.0 -lglib-2.0 -lffi 
@@ -27,6 +27,7 @@ $(TARGET): $(OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS) -lpthread -lm 
 
 .c.o:
+#	@echo $(CFLAGS)
 	$(CC) $(CFLAGS) -c $<
 
 
